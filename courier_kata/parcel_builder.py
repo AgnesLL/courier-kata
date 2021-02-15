@@ -2,6 +2,7 @@ from courier_kata.small_parcel import SmallParcel
 from courier_kata.medium_parcel import MediumParcel
 from courier_kata.large_parcel import LargeParcel
 from courier_kata.xl_parcel import XLParcel
+from courier_kata.heavy_parcel import HeavyParcel
 
 
 class ParcelBuilder:
@@ -20,14 +21,19 @@ class ParcelBuilder:
         :param int or float weight: weight of parcel in kg
         """
         if width < self.small_dim_cap and height < self.small_dim_cap and depth < self.small_dim_cap:
-            return SmallParcel(weight)
-
+            small = SmallParcel(weight)
+            heavy = HeavyParcel(weight)
+            return small if small.cost <= heavy.cost else heavy
         elif width < self.medium_dim_cap and height < self.medium_dim_cap and depth < self.medium_dim_cap:
-            return MediumParcel(weight)
-
+            medium = MediumParcel(weight)
+            heavy = HeavyParcel(weight)
+            return medium if medium.cost <= heavy.cost else heavy
         elif width < self.large_dim_cap and height < self.large_dim_cap and depth < self.large_dim_cap:
-            return LargeParcel(weight)
-
+            large = LargeParcel(weight)
+            heavy = HeavyParcel(weight)
+            return large if large.cost <= heavy.cost else heavy
         else:
-            return XLParcel(weight)
+            xl = XLParcel(weight)
+            heavy = HeavyParcel(weight)
+            return xl if xl.cost <= heavy.cost else heavy
 
