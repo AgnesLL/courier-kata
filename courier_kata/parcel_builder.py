@@ -12,21 +12,22 @@ class ParcelBuilder:
     def __init__(self):
         super().__init__()
 
-    def build_parcel(self, width, height, depth):
+    def build_parcel(self, width, height, depth, weight):
         """Return a parcel object according to dimension provided
         :param int or float width: width of parcel
         :param int or float height: height of parcel
         :param int or float depth: depth of parcel
+        :param int or float weight: weight of parcel in kg
         """
         if width < self.small_dim_cap and height < self.small_dim_cap and depth < self.small_dim_cap:
-            return SmallParcel()
+            return SmallParcel(weight)
 
         elif width < self.medium_dim_cap and height < self.medium_dim_cap and depth < self.medium_dim_cap:
-            return MediumParcel()
+            return MediumParcel(weight)
 
         elif width < self.large_dim_cap and height < self.large_dim_cap and depth < self.large_dim_cap:
-            return LargeParcel()
+            return LargeParcel(weight)
 
         else:
-            return XLParcel()
+            return XLParcel(weight)
 
